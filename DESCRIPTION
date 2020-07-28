@@ -1,0 +1,23 @@
+Package: VTSEM
+Type: Package
+Title: Vertical-Transmission Structural Equation Modeling (VT-SEM)
+Version: 0.9.0
+Authors@R: c(person(given ="Yongkang",
+                    family="Kim",
+                    role=c("aut","cre"),
+                    email="yongkangkim87@gmail.com"),
+                    person(given ="Jared",
+                    family="Balbona",
+                    role=c("aut")),
+                    person(given ="Matthew C",
+                    family="Keller",
+                    role=c("aut")))
+Maintainer: Yongkang Kim <yongkangkim87@gmail.com>
+Description: VTSEM pakcage is developed to distribute the structural equation model (SEM) for estimating the vertical transmitted environment factors via polygenic risk score (PRS) of Trio data.
+License: GPL-3.0.
+Encoding: UTF-8
+LazyData: true
+Imports: MASS, stringr, data.table, OpenMx
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
