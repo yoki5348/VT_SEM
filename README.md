@@ -11,7 +11,7 @@ devtools::install_github("yoki5348/VT_SEM")
 
 # Example 
 
-library(VT_SEM) 
+library(VTSEM) 
 
 num.cvs <- 100 #The number of causal variants
 
