@@ -1,7 +1,9 @@
 # VT_SEM
 Our project aims to develop the structural equation model (SEM) for estimating the vertical transmitted environment factors via polygenic risk score (PRS) of Trio data
 
-# To install the VT-SEM package, use following codes in R:
+# Installing VT-SEM
+
+To install the package, use following codes in R:
 
 require("devtools") 
 
