@@ -50,7 +50,7 @@ MAF.VECTOR <- runif(num.cvs,MIN.MAF,MAX.MAF)  #Can change the distribution of MA
 
 GENTP.VAR <- MAF.VECTOR*(1-MAF.VECTOR)*2
 
-ALPHA.VECTOR <- sample(c(-1,1),num.cvs,replace=TRUE)*sqrt(1/(num.cvs*GENTP.VAR)) #Can change the distribution of effect sizes here - fixed f'n of MAF
+ALPHA.VECTOR <- sample(c(-1,1),num.cvs,replace=TRUE)\*sqrt(1/(num.cvs*GENTP.VAR)) #Can change the distribution of effect sizes here - fixed f'n of MAF
 
 CV.INFO <- data.frame(MAF=MAF.VECTOR,alpha=ALPHA.VECTOR) #we'll use this for both the observed and latent
 
