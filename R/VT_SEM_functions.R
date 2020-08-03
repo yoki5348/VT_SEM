@@ -90,11 +90,6 @@ perform_SEM_model0=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max.co
     west=mxEval(w,AFE.Fit$AFEmodel,T)
     h2=VAO/sigmaest
     VFratio=VF/sigmaest
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy)/var(dat$Y)
-    wtrue=cov(dat$AO,dat$F)
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=NA
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -102,11 +97,11 @@ perform_SEM_model0=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max.co
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results22=data.frame(method="model0",VAO=VAO,VAL=1,VF=VF,VE=VE,sigma=sigmaest,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results22=data.frame(method="model0",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmaest,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
 
   }else{
-    results22=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results22=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
 
 
@@ -136,11 +131,6 @@ perform_SEM_model0=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max.co
           west=mxEval(w,AFE.Fit$AFEmodel,T)
           h2=VAO/sigmaest
           VFratio=VF/sigmaest
-          VAOtrue=var(dat$AOy)
-          VALtrue=var(dat$ALy)
-          VFtrue=var(dat$F)
-          h2true=var(dat$AOy)/var(dat$Y)
-          wtrue=cov(dat$AO,dat$F)
           k_est=mxEval(k,AFE.Fit$AFEmodel,T)
           mu_est=NA
           deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -148,14 +138,11 @@ perform_SEM_model0=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max.co
           eest=mxEval(e,AFE.Fit$AFEmodel,T)
           f_est=mxEval(f,AFE.Fit$AFEmodel,T)
           ll=summary(AFE.Fit)$Minus2LogLikelihood
-          results2=data.frame(method="model0",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmaest,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+          results2=data.frame(method="model0",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmaest,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                               deltaest=deltaest,aest=aest,eest=eest,ll=ll)
           results22=rbind(results22,results2)
         }else{
-          VAtrue=var(dat$AOy)
-          VFtrue=var(dat$F)
-          h2true=var(dat$AO)/var(dat$Y)
-          results2=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+          results2=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                               deltaest=NA,aest=NA,eest=NA,ll=NA)
           results22=rbind(results22,results2)
         }
@@ -182,7 +169,7 @@ perform_SEM_model0=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max.co
     AFE.Fit=try(mxRun(modelAFE,intervals=FALSE,silent=TRUE),silent=TRUE)
 
   }else{
-    results11=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model0",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -279,11 +266,6 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
     west=mxEval(w1,AFE.Fit$AFEmodel,T)
     h2=VAO/sigma
     VFratio=VF/sigma
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy)/var(dat$Y)
-    wtrue=cov(dat$AO,dat$F)
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -291,11 +273,11 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results11=data.frame(method="model1_eq",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results11=data.frame(method="model1_eq",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
 
   }else{
-    results11=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
 
 
@@ -327,11 +309,6 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
             west=mxEval(w1,AFE.Fit$AFEmodel,T)
             h2=VAO/sigma
             VFratio=VF/sigma
-            VAOtrue=var(dat$AOy)
-            VALtrue=var(dat$ALy)
-            VFtrue=var(dat$F)
-            h2true=var(dat$AOy)/var(dat$Y)
-            wtrue=cov(dat$AO,dat$F)
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -340,14 +317,14 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
             f_est=mxEval(f,AFE.Fit$AFEmodel,T)
             ll=summary(AFE.Fit)$Minus2LogLikelihood
 
-            results1=data.frame(method="model1_eq",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+            results1=data.frame(method="model1_eq",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                 deltaest=deltaest,aest=aest,eest=eest,ll=ll)
             results11=rbind(results11,results1)
           }else{
-            VAtrue=var(dat$AOy)
-            VFtrue=var(dat$F)
+
+
             h2true=var(dat$AO)/var(dat$Y)
-            results1=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+            results1=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results11=rbind(results11,results1)
           }
@@ -379,7 +356,7 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
 
   }else{
     cat("All iterations failed to be converged\\")
-    results11=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -489,11 +466,6 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
     west=mxEval(wo1,AFE.Fit$AFEmodel,T)
     h2=VAO/sigmao
     VFratio=VF/sigmao
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy)/var(dat$Y)
-    wtrue=cov(dat$AO,dat$F)
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -502,14 +474,14 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
 
-    results66=data.frame(method="model1_dis",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results66=data.frame(method="model1_dis",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
 
   }else{
-    VAtrue=var(dat$AOy)
-    VFtrue=var(dat$F)
+
+
     h2true=var(dat$AO)/var(dat$Y)
-    results66=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results66=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
 
@@ -540,10 +512,10 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
             west=mxEval(wo1,AFE.Fit$AFEmodel,T)
             h2=VAO/sigmao
             VFratio=VF/sigmao
-            VAOtrue=var(dat$AOy)
-            VALtrue=var(dat$ALy)
-            VFtrue=var(dat$F)
-            wtrue=cov(dat$AO,dat$F)
+
+
+
+
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -551,16 +523,16 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
             eest=mxEval(e,AFE.Fit$AFEmodel,T)
             f_est=mxEval(f,AFE.Fit$AFEmodel,T)
             ll=summary(AFE.Fit)$Minus2LogLikelihood
-            results6=data.frame(method="model1_dis",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+            results6=data.frame(method="model1_dis",VAO=VAO,VAL=NA,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                 deltaest=deltaest,aest=aest,eest=eest,ll=ll)
             results66=rbind(results66,results6)
 
 
           }else{
-            VAtrue=var(dat$AOy)
-            VFtrue=var(dat$F)
+
+
             h2true=var(dat$AO)/var(dat$Y)
-            results6=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+            results6=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results66=rbind(results66,results6)
           }
@@ -591,7 +563,7 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
     AFE.Fit=try(mxRun(modelAFE,intervals=FALSE,silent=TRUE),silent=TRUE)
 
   }else{
-    results11=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -720,11 +692,11 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
     west=mxEval(w1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigma
     VFratio=VF/sigma
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
-    wtrue=cov(dat$AO,dat$F)
+
+
+
+
+
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -732,10 +704,10 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
     aest=mxEval(a,AFE.Fit$AFEmodel,T)
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results44=data.frame(method="model2_eq",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results44=data.frame(method="model2_eq",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
   }else{
-    results44=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results44=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
 
@@ -771,11 +743,11 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
               west=mxEval(w1,AFE.Fit$AFEmodel,T)
               h2=(VAO+VAL)/sigma
               VFratio=VF/sigma
-              VAOtrue=var(dat$AOy)
-              VALtrue=var(dat$ALy)
-              VFtrue=var(dat$F)
-              h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
-              wtrue=cov(dat$AO,dat$F)
+
+
+
+
+
               k_est=mxEval(k,AFE.Fit$AFEmodel,T)
               mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
               f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -783,11 +755,11 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
               aest=mxEval(a,AFE.Fit$AFEmodel,T)
               eest=mxEval(e,AFE.Fit$AFEmodel,T)
               ll=summary(AFE.Fit)$Minus2LogLikelihood
-              results4=data.frame(method="model2_eq",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+              results4=data.frame(method="model2_eq",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigma,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                   deltaest=deltaest,aest=aest,eest=eest,ll=ll)
               results44=rbind(results44,results4)
             }else{
-              results4=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+              results4=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                   deltaest=NA,aest=NA,eest=NA,ll=NA)
               results44=rbind(results44,results4)
             }
@@ -821,7 +793,7 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
 
   }else{
     cat("All iterations failed to be converged\\")
-    results11=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model2_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                        deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -959,22 +931,22 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
     west=mxEval(wo1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigmao
     VFratio=VF/sigmao
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
+
+
+
+
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
-    wtrue=cov(dat$AO,dat$F)
+
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
     aest=mxEval(a,AFE.Fit$AFEmodel,T)
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results55=data.frame(method="model2_dis",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results55=data.frame(method="model2_dis",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
   }else{
-    results55=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results55=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
 
@@ -1012,11 +984,11 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
               west=mxEval(wo1,AFE.Fit$AFEmodel,T)
               h2=(VAO+VAL)/sigmao
               VFratio=VF/sigmao
-              VAOtrue=var(dat$AOy)
-              VALtrue=var(dat$ALy)
-              VFtrue=var(dat$F)
-              h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
-              wtrue=cov(dat$AO,dat$F)
+
+
+
+
+
               k_est=mxEval(k,AFE.Fit$AFEmodel,T)
               mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
               f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -1024,11 +996,11 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
               aest=mxEval(a,AFE.Fit$AFEmodel,T)
               eest=mxEval(e,AFE.Fit$AFEmodel,T)
               ll=summary(AFE.Fit)$Minus2LogLikelihood
-              results5=data.frame(method="model2_dis",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+              results5=data.frame(method="model2_dis",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                   deltaest=deltaest,aest=aest,eest=eest,ll=ll)
               results55=rbind(results55,results5)
             }else{
-              results5=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+              results5=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                   deltaest=NA,aest=NA,eest=NA,ll=NA)
               results55=rbind(results55,results5)
             }
@@ -1063,7 +1035,7 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
 
   }else{
     cat("All iterations failed to be converged\\")
-    results11=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model2_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                        deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -1199,22 +1171,22 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
     west=mxEval(wo1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigmao
     VFratio=VF/sigmao
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
-    h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
+
+
+
+
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
-    wtrue=cov(dat$AO,dat$F)
+
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
     aest=mxEval(a,AFE.Fit$AFEmodel,T)
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results88=data.frame(method="model2_eq_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results88=data.frame(method="model2_eq_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
   }else{
-    results88=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results88=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
 
@@ -1252,11 +1224,11 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
             west=mxEval(wo1,AFE.Fit$AFEmodel,T)
             h2=(VAO+VAL)/sigmao
             VFratio=VF/sigmao
-            VAOtrue=var(dat$AOy)
-            VALtrue=var(dat$ALy)
-            VFtrue=var(dat$F)
-            h2true=var(dat$AOy+dat$ALy)/var(dat$Y)
-            wtrue=cov(dat$AO,dat$F)
+
+
+
+
+
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -1264,11 +1236,11 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
             aest=mxEval(a,AFE.Fit$AFEmodel,T)
             eest=mxEval(e,AFE.Fit$AFEmodel,T)
             ll=summary(AFE.Fit)$Minus2LogLikelihood
-            results8=data.frame(method="model2_eq_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+            results8=data.frame(method="model2_eq_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                 deltaest=deltaest,aest=aest,eest=eest,ll=ll)
             results88=rbind(results88,results8)
           }else{
-            results8=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+            results8=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results88=rbind(results88,results8)
           }
@@ -1301,7 +1273,7 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
     AFE.Fit=try(mxRun(modelAFE,intervals=FALSE,silent=TRUE),silent=TRUE)
 
   }else{
-    results11=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model2_eq_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
@@ -1428,11 +1400,11 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
     west=mxEval(w1,AFE.Fit$AFEmodel,T)
     h2=VAO/sigmao
     VFratio=VF/sigmao
-    VAOtrue=var(dat$AOy)
-    VALtrue=var(dat$ALy)
-    VFtrue=var(dat$F)
+
+
+
     h2true=var(dat$AOy)/var(dat$Y)
-    wtrue=cov(dat$AO,dat$F)
+
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -1440,14 +1412,14 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
     eest=mxEval(e,AFE.Fit$AFEmodel,T)
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     ll=summary(AFE.Fit)$Minus2LogLikelihood
-    results77=data.frame(method="model2_dis_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+    results77=data.frame(method="model2_dis_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                          deltaest=deltaest,aest=aest,eest=eest,ll=ll)
 
   }else{
-    VAtrue=var(dat$AOy)
-    VFtrue=var(dat$F)
+
+
     h2true=var(dat$AO)/var(dat$Y)
-    results77=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results77=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
 
@@ -1481,11 +1453,11 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
             west=mxEval(w1,AFE.Fit$AFEmodel,T)
             h2=VAO/sigmao
             VFratio=VF/sigmao
-            VAOtrue=var(dat$AOy)
-            VALtrue=var(dat$ALy)
-            VFtrue=var(dat$F)
+
+
+
             h2true=var(dat$AOy)/var(dat$Y)
-            wtrue=cov(dat$AO,dat$F)
+
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -1493,11 +1465,11 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
             eest=mxEval(e,AFE.Fit$AFEmodel,T)
             f_est=mxEval(f,AFE.Fit$AFEmodel,T)
             ll=summary(AFE.Fit)$Minus2LogLikelihood
-            results7=data.frame(method="model2_dis_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,VAOtrue=VAOtrue,VALtrue=VALtrue,VFtrue=VFtrue,sigma_true=var(dat$Y),h2true=h2true,wtrue=wtrue,k_est=k_est,mu=mu_est,f=f_est,mutrue=cov(dat$YP,dat$YM)/(var(dat$YP)*var(dat$YM)),
+            results7=data.frame(method="model2_dis_NP",VAO=VAO,VAL=VAL,VF=VF,VE=VE,sigma=sigmao,west=west,h2=h2,k_est=k_est,mu=mu_est,f=f_est,
                                 deltaest=deltaest,aest=aest,eest=eest,ll=ll)
             results77=rbind(results77,results7)
           }else{
-            results7=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+            results7=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results77=rbind(results77,results7)
           }
@@ -1522,7 +1494,7 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
 
   }else{
     cat("All iterations failed to be converged\\")
-    results11=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,VAOtrue=NA,VALtrue=NA,VFtrue=NA,sigma_true=NA,h2true=NA,wtrue=NA,k_est=NA,mu=NA,f=NA,mutrue=NA,
+    results11=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                        deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
   results=list(AFE.Fit=AFE.Fit,result_summary=results11)
