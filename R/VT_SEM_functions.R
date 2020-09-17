@@ -931,13 +931,8 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
     west=mxEval(wo1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigmao
     VFratio=VF/sigmao
-
-
-
-
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
-
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
     aest=mxEval(a,AFE.Fit$AFEmodel,T)
@@ -961,7 +956,8 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
             g <- mxMatrix(type="Lower",nrow=nv,ncol=nv,free=TRUE,values=g.init,label="hap_PRS_cov",name="g")
             delta <- mxMatrix(type="Lower",nrow=nv,ncol=nv,free=TRUE,values=delta.init,label="additive_coefficient",name="delta",lbound=-0.01)
             a <- mxMatrix(type="Lower",nrow=nv,ncol=nv,free=TRUE,values=a.init,label="latent_additive_coefficient",name="a",lbound=-0.01)
-
+            init_list2=data.frame(f.init=f.init,e.init=e.init,g.init=g.init,delta.init=delta.init,a.init=a.init)
+            init_list=rbind(init_list,init_list2)
             params <- list( j , k , f , e ,g ,delta , a,
                             xo1 ,xp1 ,wo1 ,wp1,  mu1,
                             Omega1 , Gamma1 ,
@@ -984,11 +980,6 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
               west=mxEval(wo1,AFE.Fit$AFEmodel,T)
               h2=(VAO+VAL)/sigmao
               VFratio=VF/sigmao
-
-
-
-
-
               k_est=mxEval(k,AFE.Fit$AFEmodel,T)
               mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
               f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -1031,6 +1022,8 @@ perform_SEM_model2_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Yp
                     sigmao1 , sigmap1,ThetaNTM05 , ThetaTM05,spsPRS , PO ,  spouse,
                     CVmat, MNmat,
                     funML,objdat)
+    dat_SEM2 <- mxData(observed=dat_SEM, type="raw")
+    modelAFE <- mxModel("AFEmodel",params,dat_SEM2)
     AFE.Fit=try(mxRun(modelAFE,intervals=FALSE,silent=TRUE),silent=TRUE)
 
   }else{
