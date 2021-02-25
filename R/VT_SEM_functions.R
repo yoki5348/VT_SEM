@@ -1384,7 +1384,6 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
   }else{
 
 
-    h2true=var(dat$AO)/var(dat$Y)
     results77=data.frame(method="model2_dis_NP",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
