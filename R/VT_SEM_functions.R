@@ -323,7 +323,6 @@ perform_SEM_model1_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,max
           }else{
 
 
-            h2true=var(dat$AO)/var(dat$Y)
             results1=data.frame(method="model1_eq",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results11=rbind(results11,results1)
@@ -480,7 +479,6 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
   }else{
 
 
-    h2true=var(dat$AO)/var(dat$Y)
     results66=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                          deltaest=NA,aest=NA,eest=NA,ll=NA)
   }
@@ -531,7 +529,6 @@ perform_SEM_model1_dis=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,ma
           }else{
 
 
-            h2true=var(dat$AO)/var(dat$Y)
             results6=data.frame(method="model1_dis",VAO=NA,VAL=NA,VF=NA,VE=NA,sigma=NA,west=NA,h2=NA,k_est=NA,mu=NA,f=NA,
                                 deltaest=NA,aest=NA,eest=NA,ll=NA)
             results66=rbind(results66,results6)
@@ -692,11 +689,6 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
     west=mxEval(w1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigma
     VFratio=VF/sigma
-
-
-
-
-
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -743,11 +735,6 @@ perform_SEM_model2_eq=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Ymlabel,Ypl
               west=mxEval(w1,AFE.Fit$AFEmodel,T)
               h2=(VAO+VAL)/sigma
               VFratio=VF/sigma
-
-
-
-
-
               k_est=mxEval(k,AFE.Fit$AFEmodel,T)
               mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
               f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -1164,10 +1151,6 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
     west=mxEval(wo1,AFE.Fit$AFEmodel,T)
     h2=(VAO+VAL)/sigmao
     VFratio=VF/sigmao
-
-
-
-
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
 
@@ -1217,11 +1200,6 @@ perform_SEM_model2_eq_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel,
             west=mxEval(wo1,AFE.Fit$AFEmodel,T)
             h2=(VAO+VAL)/sigmao
             VFratio=VF/sigmao
-
-
-
-
-
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             f_est=mxEval(f,AFE.Fit$AFEmodel,T)
@@ -1393,11 +1371,6 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
     west=mxEval(w1,AFE.Fit$AFEmodel,T)
     h2=VAO/sigmao
     VFratio=VF/sigmao
-
-
-
-    h2true=var(dat$AOy)/var(dat$Y)
-
     k_est=mxEval(k,AFE.Fit$AFEmodel,T)
     mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
     deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
@@ -1446,11 +1419,6 @@ perform_SEM_model2_dis_NP=function(dat,NTmlabel,Tmlabel,NTplabel,Tplabel,Yolabel
             west=mxEval(w1,AFE.Fit$AFEmodel,T)
             h2=VAO/sigmao
             VFratio=VF/sigmao
-
-
-
-            h2true=var(dat$AOy)/var(dat$Y)
-
             k_est=mxEval(k,AFE.Fit$AFEmodel,T)
             mu_est=mxEval(mu1,AFE.Fit$AFEmodel,T)
             deltaest=mxEval(delta,AFE.Fit$AFEmodel,T)
