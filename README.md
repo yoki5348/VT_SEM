@@ -81,3 +81,15 @@ print(results) ##Print results
   
 summary(model0$AFE.Fit) #Check the fitted results 
   
+# Simulated confidence interval for several parameters
+These functions gives user simulated confidence intervals for some parameters such as VF,r2PGS,r2LGS, and w.
+n:number of trio
+r2PGS:true R^2 of observed PGS
+r2LGS: true R^2 of latent PGS
+VF: true explained variance of familial shared environmental factors
+w: true cov(F,Y)
+percentile: probability ranges of confidence interval (e.g. percentile=95, 95% C.I will be returned)
+c.i.compute_VF=function(n,r2PGS,VF,percentile) : Confidence interval of VF
+c.i.compute_r2PGS=function(n,r2PGS,percentile): Confidence interval of R^2 of PGS
+c.i.compute_r2LGS=function(n,r2PGS,r2LGS,percentile) : Confidence interval of R^2 of LGS
+c.i.compute_w=function(n,r2PGS,w,percentile) : Confidence interval of w
